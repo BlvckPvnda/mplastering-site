@@ -3,7 +3,7 @@ import { beforeAfter } from '../constants/content'
 
 export function BeforeAfterSection() {
   return (
-    <section id="before-after" className="before-after section">
+    <section id="before-after" className="before-after section section--center">
       <div className="layout">
         <h2 className="section__title">Before &amp; after</h2>
         <p className="section__lead">

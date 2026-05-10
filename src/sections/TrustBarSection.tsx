@@ -1,7 +1,7 @@
 import { trustItems } from '../constants/content'
 
 function Icon({ type }: { type: (typeof trustItems)[number]['icon'] }) {
-  const common = { width: 28, height: 28, fill: 'none', stroke: 'currentColor', strokeWidth: 2 }
+  const common = { width: 24, height: 24, fill: 'none', stroke: 'currentColor', strokeWidth: 2 }
   switch (type) {
     case 'shield':
       return (
@@ -33,14 +33,13 @@ function Icon({ type }: { type: (typeof trustItems)[number]['icon'] }) {
 
 export function TrustBarSection() {
   return (
-    <section id="trust" className="trust section">
+    <section id="trust" className="trust section section--tight-top">
       <div className="layout">
         <ul className="trust__list">
-          {trustItems.map((item, i) => (
+          {trustItems.map((item) => (
             <li
               key={item.label}
-              className={`trust__item surface-card animate-up`}
-              style={{ animationDelay: `${0.1 * i}s` }}
+              className="trust__item glass-card"
             >
               <span className="trust__icon">
                 <Icon type={item.icon} />

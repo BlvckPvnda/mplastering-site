@@ -1,49 +1,34 @@
-import { useState } from 'react'
+import { useRef, useEffect } from 'react'
 import { services } from '../constants/content'
-import { whatsAppHref } from '../constants/contact'
 import { Button } from './Button'
-
-type FormState = {
-  name: string
-  email: string
-  phone: string
-  serviceId: string
-  message: string
-}
-
-const initial: FormState = {
-  name: '',
-  email: '',
-  phone: '',
-  serviceId: services[0]?.id ?? '',
-  message: '',
-}
-
-function looseEmailOk(s: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim())
-}
+import { useQuoteForm } from '../hooks/useQuoteForm'
 
 export function MultiStepQuoteForm() {
-  const [step, setStep] = useState(0)
-  const [data, setData] = useState<FormState>(initial)
-  const [err, setErr] = useState<string | null>(null)
+  const {
+    step,
+    data,
+    errors,
+    isSubmitting,
+    updateField,
+    nextFrom0,
+    nextFrom1,
+    goBack,
+    whatsAppUrl,
+  } = useQuoteForm()
 
-  const nextFrom0 = () => {
-    setErr(null)
-    if (!data.name.trim()) return setErr('Please add your name.')
-    if (!looseEmailOk(data.email)) return setErr('Please add a valid email.')
-    if (!data.phone.trim()) return setErr('Please add a phone number.')
-    setStep(1)
-  }
+  const firstErrorRef = useRef<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(null)
+  const errorSummaryRef = useRef<HTMLParagraphElement>(null)
 
-  const nextFrom1 = () => {
-    setErr(null)
-    if (!data.serviceId) return setErr('Please choose a service.')
-    if (!data.message.trim()) return setErr('Tell us briefly what you need.')
-    setStep(2)
-  }
-
-  const waMessage = `Estimate request — ${data.name}\nService: ${data.serviceId}\n${data.message}\nPhone: ${data.phone}`
+  // Focus management for errors
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      if (errorSummaryRef.current) {
+        errorSummaryRef.current.focus()
+      } else if (firstErrorRef.current) {
+        firstErrorRef.current.focus()
+      }
+    }
+  }, [errors])
 
   if (step === 2) {
     return (
@@ -57,7 +42,7 @@ export function MultiStepQuoteForm() {
           Prefer WhatsApp? Send the same summary in one tap.
         </p>
         <div className="quote-success__actions">
-          <Button href={whatsAppHref(waMessage)} variant="primary">
+          <Button href={whatsAppUrl} variant="primary">
             Message on WhatsApp
           </Button>
           <Button href="#hero" variant="ghost">
@@ -68,50 +53,89 @@ export function MultiStepQuoteForm() {
     )
   }
 
+  const hasErrors = Object.keys(errors).length > 0
+  const totalSteps = 2
+
   return (
     <form
       className="quote-form surface-card"
       onSubmit={(e) => e.preventDefault()}
       noValidate
     >
-      {err ? (
-        <p className="form-error" role="alert">
-          {err}
-        </p>
-      ) : null}
+      <div className="quote-form__progress" aria-hidden="true">
+        {[...Array(totalSteps)].map((_, i) => (
+          <div 
+            key={i} 
+            className={`quote-form__progress-step ${i <= step ? 'is-active' : ''}`} 
+          />
+        ))}
+      </div>
+
+      <p className="visually-hidden">
+        Step {step + 1} of {totalSteps}
+      </p>
+
+      {/* Persistent error region for screen readers */}
+      <div aria-live="assertive" aria-atomic="true">
+        {hasErrors && (
+          <p 
+            ref={errorSummaryRef}
+            className="form-error" 
+            tabIndex={-1}
+          >
+            Please fix the errors below to continue.
+          </p>
+        )}
+      </div>
 
       {step === 0 ? (
         <fieldset className="quote-form__fieldset" key="step-0">
           <legend className="quote-form__legend">Your contact details</legend>
+          
           <label className="field">
             <span className="field__label">Full name</span>
             <input
+              ref={errors.name ? firstErrorRef : null}
               name="name"
               autoComplete="name"
               value={data.name}
-              onChange={(e) => setData({ ...data, name: e.target.value })}
+              onChange={(e) => updateField('name', e.target.value)}
+              aria-invalid={!!errors.name}
+              aria-describedby={errors.name ? 'name-error' : undefined}
             />
+            {errors.name && <span id="name-error" className="field__error">{errors.name}</span>}
           </label>
+
           <label className="field">
             <span className="field__label">Email</span>
             <input
+              ref={!errors.name && errors.email ? firstErrorRef : null}
               name="email"
               type="email"
               autoComplete="email"
               value={data.email}
-              onChange={(e) => setData({ ...data, email: e.target.value })}
+              onChange={(e) => updateField('email', e.target.value)}
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? 'email-error' : undefined}
             />
+            {errors.email && <span id="email-error" className="field__error">{errors.email}</span>}
           </label>
+
           <label className="field">
             <span className="field__label">Phone</span>
             <input
+              ref={!errors.name && !errors.email && errors.phone ? firstErrorRef : null}
               name="phone"
               type="tel"
               autoComplete="tel"
               value={data.phone}
-              onChange={(e) => setData({ ...data, phone: e.target.value })}
+              onChange={(e) => updateField('phone', e.target.value)}
+              aria-invalid={!!errors.phone}
+              aria-describedby={errors.phone ? 'phone-error' : undefined}
             />
+            {errors.phone && <span id="phone-error" className="field__error">{errors.phone}</span>}
           </label>
+
           <div className="quote-form__row">
             <Button type="button" variant="primary" onClick={nextFrom0}>
               Continue
@@ -121,12 +145,16 @@ export function MultiStepQuoteForm() {
       ) : (
         <fieldset className="quote-form__fieldset" key="step-1">
           <legend className="quote-form__legend">Job details</legend>
+
           <label className="field">
             <span className="field__label">Service</span>
             <select
+              ref={errors.serviceId ? (firstErrorRef as any) : null}
               name="service"
               value={data.serviceId}
-              onChange={(e) => setData({ ...data, serviceId: e.target.value })}
+              onChange={(e) => updateField('serviceId', e.target.value)}
+              aria-invalid={!!errors.serviceId}
+              aria-describedby={errors.serviceId ? 'service-error' : undefined}
             >
               {services.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -134,22 +162,29 @@ export function MultiStepQuoteForm() {
                 </option>
               ))}
             </select>
+            {errors.serviceId && <span id="service-error" className="field__error">{errors.serviceId}</span>}
           </label>
+
           <label className="field">
             <span className="field__label">What do you need?</span>
             <textarea
+              ref={!errors.serviceId && errors.message ? firstErrorRef : null}
               name="message"
               rows={5}
               value={data.message}
-              onChange={(e) => setData({ ...data, message: e.target.value })}
+              onChange={(e) => updateField('message', e.target.value)}
+              aria-invalid={!!errors.message}
+              aria-describedby={errors.message ? 'message-error' : undefined}
             />
+            {errors.message && <span id="message-error" className="field__error">{errors.message}</span>}
           </label>
+
           <div className="quote-form__row quote-form__row--split">
-            <Button type="button" variant="secondary" onClick={() => setStep(0)}>
+            <Button type="button" variant="secondary" onClick={goBack} disabled={isSubmitting}>
               Back
             </Button>
-            <Button type="button" variant="primary" onClick={nextFrom1}>
-              Finish
+            <Button type="button" variant="primary" onClick={nextFrom1} disabled={isSubmitting}>
+              {isSubmitting ? 'Sending...' : 'Finish'}
             </Button>
           </div>
         </fieldset>

@@ -1,5 +1,6 @@
 import { MobileCtaBar } from './components/MobileCtaBar'
 import { SiteHeader } from './components/SiteHeader'
+import { ScrollReveal } from './components/ScrollReveal'
 import { AboutSection } from './sections/AboutSection'
 import { BeforeAfterSection } from './sections/BeforeAfterSection'
 import { FooterSection } from './sections/FooterSection'
@@ -18,12 +19,24 @@ function App() {
       <SiteHeader />
       <main id="main" className="app-main">
         <HeroSection />
-        <TrustBarSection />
-        <ServicesSection />
-        <BeforeAfterSection />
-        <AboutSection />
-        <ReviewsSection />
-        <QuoteSection />
+        <ScrollReveal delay={100}>
+          <TrustBarSection />
+        </ScrollReveal>
+        <ScrollReveal delay={200}>
+          <ServicesSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <BeforeAfterSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <AboutSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <ReviewsSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <QuoteSection />
+        </ScrollReveal>
         <FooterSection />
       </main>
       <MobileCtaBar />

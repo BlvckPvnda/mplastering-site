@@ -34,6 +34,8 @@
 1. `SiteHeader`: logo/text “Mplastering”, anchor links to all section IDs, sticky on scroll, mobile-friendly (hamburger or compact row).
 2. `MobileCtaBar` (or FAB): fixed bottom on small breakpoints — primary “Request estimate” → `#quote`; ensure safe-area padding for notched phones.
 3. `Button` component: primary/secondary variants, `:focus-visible` rings, sufficient colour contrast.
+4. **Design Refinement (V1.1):** Primary buttons use Logo Grey (`#919598`) with a modern 'Blue Core Glow' (`rgba(12, 74, 110)`) to bridge monochrome branding with dynamic interactive states.
+5. **Branding Scale:** Header height increased to `5.5rem` and logo to `4.5rem` to ensure visual parity with primary CTAs.
 
 ### Phase C — Sections (in order)
 
@@ -108,14 +110,15 @@ src/sections/FooterSection.tsx
 
 ## 5. Acceptance criteria (V1 done =)
 
-- [ ] All sections appear in PRD order on one page.
-- [ ] Header links scroll smoothly to each section; focus not lost in a way that breaks keyboard users.
-- [ ] Mobile: persistent “Request estimate” visible and tappable; thumb-friendly tap targets (min ~44px).
-- [ ] Primary buttons meet high-contrast intent (test light/dark if you add dark mode later — V1 can be light-only).
-- [ ] Before/after control is operable with keyboard and has non-empty labels.
-- [ ] Quote form blocks advance with validation; final state is success UI only (no backend).
-- [ ] Footer includes visible local place names + working `tel:` and `wa.me` once you paste real numbers (placeholders OK for dev).
-- [ ] `npm run build` succeeds; `dist/` can be uploaded to a static host.
+- [x] All sections appear in PRD order on one page.
+- [x] Header links scroll smoothly to each section; focus not lost in a way that breaks keyboard users.
+- [x] Mobile: persistent “Request estimate” visible and tappable; thumb-friendly tap targets (min ~44px).
+- [x] Primary buttons meet high-contrast intent (Logo Grey + Dark Slate text) and feature brand-blue glow effects.
+- [x] Services and Before/After sections use center-alignment for improved visual balance.
+- [x] Before/after control is operable with keyboard and has non-empty labels.
+- [x] Quote form blocks advance with validation; final state is success UI only (no backend).
+- [x] Footer includes visible local place names + working `tel:` and `wa.me` once you paste real numbers (placeholders OK for dev).
+- [x] `npm run build` succeeds; `dist/` can be uploaded to a static host.
 
 ---
 

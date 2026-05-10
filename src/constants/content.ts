@@ -16,9 +16,9 @@ export const services: Service[] = [
     title: 'Internal skimming',
     tagline: 'Glass-smooth finishes for every room.',
     bullets: [
-      'Artex removal and ceiling smoothing',
-      'Wall repairs and making good',
       'New builds and re-skims',
+      'Wall repairs and making good',
+      'Artex removal and ceiling smoothing',
     ],
   },
   {
@@ -38,7 +38,7 @@ export const services: Service[] = [
     bullets: [
       'Repairing “battered” walls',
       'Crack repairs and preparation',
-      'Damp-proofing preparation ready for your specialist',
+      'Damp-proofing preparation',
     ],
   },
 ]
@@ -59,24 +59,51 @@ export type Review = {
 
 export const reviews: Review[] = [
   {
-    quote:
-      'Glen was on time, friendly, and the finish is immaculate. He worked around school runs—we barely knew he was here.',
-    name: 'Sarah M.',
-    subtitle: 'Internal skim',
+    quote: "Glen and Benjie did an amazing job in my new house. The old walls look brand new! The service received has been fantastic and they are both brilliant at what they do.",
+    name: "Gabriella Matthews",
+    subtitle: "Whole house restoration",
     rating: 5,
   },
   {
-    quote:
-      'Our battered hallway looks brand new. Clear communication start to finish.',
-    name: 'James K.',
-    subtitle: 'Wall restoration',
+    quote: "Absolutely fantastic job plastering areas for new radiators. The service has been superb from start to finish and I would highly recommend Glen.",
+    name: "Kate Drew",
+    subtitle: "Wall repairs",
     rating: 5,
   },
   {
-    quote:
-      'Rendered front elevation looks superb. Professional, punctual, and tidy every day.',
-    name: 'The Patel family',
-    subtitle: 'Exterior render',
+    quote: "Glen's service was great from start to finish. He answers the phone and communicates well. He masked everything up and works tidy. Absolute pleasure to work with.",
+    name: "Loee Allen",
+    subtitle: "Internal skimming",
+    rating: 5,
+  },
+  {
+    quote: "Fantastic job plastering our extension and office—super smooth walls, timely, tidy and friendly. Wouldn’t hesitate to recommend!",
+    name: "Sarah Milsom",
+    subtitle: "Extension & Office",
+    rating: 5,
+  },
+  {
+    quote: "Glen recently plastered our kitchen and we couldn’t be happier with the result. Organised, quick, and tidy. Room looks great. Thank you!",
+    name: "Siânie Stephens",
+    subtitle: "Kitchen plastering",
+    rating: 5,
+  },
+  {
+    quote: "Excellent job plastering our new garden room. Super efficient and a brilliant finish. Wouldn’t hesitate to recommend.",
+    name: "Matt Row",
+    subtitle: "Garden room",
+    rating: 5,
+  },
+  {
+    quote: "The quality of the plastering is as close to perfect as you can get. Professionalism stands out over anything else. Glen and the team are on point.",
+    name: "Niz Khan",
+    subtitle: "Ceiling restoration",
+    rating: 5,
+  },
+  {
+    quote: "Great job, reliable and on time!",
+    name: "Lyndsay Evans",
+    subtitle: "Plastering service",
     rating: 5,
   },
 ]
