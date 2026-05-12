@@ -746,15 +746,34 @@ a:hover {
 }
 
 .hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--s-4);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.hero__actions .btn {
+  padding-inline: 0.5rem; /* Tighten padding for mobile */
+  font-size: 0.95rem; /* Slightly smaller to fit side-by-side */
+  text-align: center;
+}
+
+.hero__actions .btn:nth-child(3) {
+  grid-column: 1 / -1; /* Third button spans full width on mobile */
 }
 
 @media (min-width: 900px) {
   .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
+    gap: var(--s-4);
+    width: auto;
+  }
+  
+  .hero__actions .btn {
+    padding-inline: 1.5rem;
+    font-size: 1rem;
   }
 }
 
