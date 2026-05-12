@@ -748,7 +748,14 @@ a:hover {
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--s-4);
+}
+
+@media (min-width: 900px) {
+  .hero__actions {
+    justify-content: flex-start;
+  }
 }
 
 .hero__panel {
