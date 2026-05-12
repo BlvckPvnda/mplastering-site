@@ -7,6 +7,7 @@ export type FormState = {
   name: string
   email: string
   phone: string
+  postcode: string
   serviceId: string
   message: string
 }
@@ -15,6 +16,7 @@ const initial: FormState = {
   name: '',
   email: '',
   phone: '',
+  postcode: '',
   serviceId: services[0]?.id ?? '',
   message: '',
 }
@@ -49,11 +51,11 @@ export function useQuoteForm() {
     }
 
     setIsSubmitting(true)
-    
-    // Mock submission
+
+    // Mock submission — replace with actual API call before launch
     console.log('Submitting quote request:', data)
     await new Promise((resolve) => setTimeout(resolve, 1000))
-    
+
     setIsSubmitting(false)
     setStep(2)
     return true
@@ -64,7 +66,12 @@ export function useQuoteForm() {
     setErrors({})
   }, [])
 
-  const waMessage = `Estimate request — ${data.name}\nService: ${data.serviceId}\n${data.message}\nPhone: ${data.phone}`
+  const waMessage =
+    `Estimate request — ${data.name}\n` +
+    `Postcode: ${data.postcode}\n` +
+    `Phone: ${data.phone}\n` +
+    `Service: ${data.serviceId}\n` +
+    `${data.message}`
 
   return {
     step,

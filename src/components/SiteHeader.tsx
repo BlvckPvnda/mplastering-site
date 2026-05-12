@@ -1,15 +1,7 @@
 import { useEffect, useState } from 'react'
 import logoSvg from '../../assets/logo/Plastering.svg'
 import { Button } from './Button'
-
-const navItems = [
-  { href: '#trust', label: 'Trust' },
-  { href: '#services', label: 'Services' },
-  { href: '#before-after', label: 'Work' },
-  { href: '#about', label: 'About' },
-  { href: '#reviews', label: 'Reviews' },
-  { href: '#quote', label: 'Estimate' },
-]
+import { navItems } from '../constants/content'
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)

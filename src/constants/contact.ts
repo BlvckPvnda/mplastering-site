@@ -1,7 +1,7 @@
 /** Replace placeholders with production numbers before launch. */
 
 /** Update display text and href together for your live number */
-export const PHONE_DISPLAY = '+44 7951 049108'
+export const PHONE_DISPLAY = '07951 049108'
 export const PHONE_HREF = 'tel:+447951049108'
 
 /** E.164 without + for wa.me links */
@@ -16,4 +16,4 @@ export function whatsAppHref(prefill?: string): string {
 }
 
 export const MAP_SEARCH_URL =
-  'https://www.google.com/maps/search/?api=1&query=Plastering%20services%20UK'
+  'https://www.google.com/maps/search/?api=1&query=Mplastering+St+Albans+Hertfordshire'

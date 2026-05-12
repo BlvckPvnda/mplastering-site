@@ -35,7 +35,7 @@ export function MultiStepQuoteForm() {
       <div className="quote-success surface-card animate-slide" key="success">
         <h3 className="quote-success__title">Thank you</h3>
         <p className="quote-success__body">
-          Thank you for the details—you’re on our list. We’ll follow up shortly to confirm the
+          Thank you for the details—you're on our list. We'll follow up shortly to confirm the
           next steps and schedule a visit if needed.
         </p>
         <p className="quote-success__hint">
@@ -64,9 +64,9 @@ export function MultiStepQuoteForm() {
     >
       <div className="quote-form__progress" aria-hidden="true">
         {[...Array(totalSteps)].map((_, i) => (
-          <div 
-            key={i} 
-            className={`quote-form__progress-step ${i <= step ? 'is-active' : ''}`} 
+          <div
+            key={i}
+            className={`quote-form__progress-step ${i <= step ? 'is-active' : ''}`}
           />
         ))}
       </div>
@@ -78,9 +78,9 @@ export function MultiStepQuoteForm() {
       {/* Persistent error region for screen readers */}
       <div aria-live="assertive" aria-atomic="true">
         {hasErrors && (
-          <p 
+          <p
             ref={errorSummaryRef}
-            className="form-error" 
+            className="form-error"
             tabIndex={-1}
           >
             Please fix the errors below to continue.
@@ -91,11 +91,11 @@ export function MultiStepQuoteForm() {
       {step === 0 ? (
         <fieldset className="quote-form__fieldset" key="step-0">
           <legend className="quote-form__legend">Your contact details</legend>
-          
+
           <label className="field">
             <span className="field__label">Full name</span>
             <input
-              ref={errors.name ? firstErrorRef : null}
+              ref={errors.name ? (firstErrorRef as any) : null}
               name="name"
               autoComplete="name"
               value={data.name}
@@ -109,7 +109,7 @@ export function MultiStepQuoteForm() {
           <label className="field">
             <span className="field__label">Email</span>
             <input
-              ref={!errors.name && errors.email ? firstErrorRef : null}
+              ref={!errors.name && errors.email ? (firstErrorRef as any) : null}
               name="email"
               type="email"
               autoComplete="email"
@@ -124,16 +124,34 @@ export function MultiStepQuoteForm() {
           <label className="field">
             <span className="field__label">Phone</span>
             <input
-              ref={!errors.name && !errors.email && errors.phone ? firstErrorRef : null}
+              ref={!errors.name && !errors.email && errors.phone ? (firstErrorRef as any) : null}
               name="phone"
               type="tel"
               autoComplete="tel"
+              placeholder="07XXX XXXXXX"
               value={data.phone}
               onChange={(e) => updateField('phone', e.target.value)}
               aria-invalid={!!errors.phone}
               aria-describedby={errors.phone ? 'phone-error' : undefined}
             />
             {errors.phone && <span id="phone-error" className="field__error">{errors.phone}</span>}
+          </label>
+
+          {/* PP-8: postcode field for service area qualification */}
+          <label className="field">
+            <span className="field__label">Postcode</span>
+            <input
+              ref={!errors.name && !errors.email && !errors.phone && errors.postcode ? (firstErrorRef as any) : null}
+              name="postcode"
+              type="text"
+              autoComplete="postal-code"
+              placeholder="e.g. M1 1AA"
+              value={data.postcode}
+              onChange={(e) => updateField('postcode', e.target.value.toUpperCase())}
+              aria-invalid={!!errors.postcode}
+              aria-describedby={errors.postcode ? 'postcode-error' : undefined}
+            />
+            {errors.postcode && <span id="postcode-error" className="field__error">{errors.postcode}</span>}
           </label>
 
           <div className="quote-form__row">
@@ -168,7 +186,7 @@ export function MultiStepQuoteForm() {
           <label className="field">
             <span className="field__label">What do you need?</span>
             <textarea
-              ref={!errors.serviceId && errors.message ? firstErrorRef : null}
+              ref={!errors.serviceId && errors.message ? (firstErrorRef as any) : null}
               name="message"
               rows={5}
               value={data.message}
@@ -183,8 +201,9 @@ export function MultiStepQuoteForm() {
             <Button type="button" variant="secondary" onClick={goBack} disabled={isSubmitting}>
               Back
             </Button>
+            {/* SD-5: isSubmitting now also disables + shows spinner text */}
             <Button type="button" variant="primary" onClick={nextFrom1} disabled={isSubmitting}>
-              {isSubmitting ? 'Sending...' : 'Finish'}
+              {isSubmitting ? '⏳ Sending…' : 'Submit request'}
             </Button>
           </div>
         </fieldset>

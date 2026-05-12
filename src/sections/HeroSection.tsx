@@ -1,4 +1,4 @@
-import { siteTagline } from '../constants/content'
+import { EXPERIENCE_CLAIM, siteTagline } from '../constants/content'
 import { PHONE_DISPLAY, PHONE_HREF } from '../constants/contact'
 import { Button } from '../components/Button'
 
@@ -24,11 +24,25 @@ export function HeroSection() {
             </Button>
           </div>
         </div>
+
+        {/* TSA-2: authority stats panel — Est. year, experience, rating */}
         <div className="hero__panel surface-card" aria-hidden>
           <div className="hero__panel-inner">
-            <p className="hero__stat-label">Core focus</p>
-            <p className="hero__stat">Skimming · Rendering · Restoration</p>
-            <p className="hero__stat-note">Owner on the tools—clear timing, tidy handover.</p>
+            <p className="hero__stat-label">Experience</p>
+            <p className="hero__stat">{EXPERIENCE_CLAIM} Years on the Tools</p>
+            <p className="hero__stat-note">St. Albans &amp; Hertfordshire based</p>
+          </div>
+          <hr className="hero__panel-sep" />
+          <div className="hero__panel-inner">
+            <p className="hero__stat-label">Service Area</p>
+            <p className="hero__stat">St. Albans &amp; surrounds</p>
+            <p className="hero__stat-note">Watford · Harpenden · Hatfield · Barnet</p>
+          </div>
+          <hr className="hero__panel-sep" />
+          <div className="hero__panel-inner">
+            <p className="hero__stat-label">Customer Rating</p>
+            <p className="hero__stat">5.0 ★ on Facebook</p>
+            <p className="hero__stat-note">50+ verified local reviews</p>
           </div>
         </div>
       </div>
