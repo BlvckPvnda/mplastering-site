@@ -541,6 +541,13 @@ a:hover {
   letter-spacing: -0.03em;
   color: var(--text);
   text-decoration: none;
+  margin-left: -0.5rem; /* Pull logo left on mobile */
+}
+
+@media (min-width: 900px) {
+  .site-header__brand {
+    margin-left: 0;
+  }
 }
 
 .site-header__brand:hover {
