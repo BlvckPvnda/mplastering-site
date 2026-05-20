@@ -56,7 +56,7 @@ export function useQuoteForm() {
     )
   }, [])
 
-  const nextFrom1 = useCallback(async () => {
+  const nextFrom1 = useCallback(() => {
     const stepErrors = validateStep1(data)
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors)
@@ -66,12 +66,11 @@ export function useQuoteForm() {
 
     setIsSubmitting(true)
 
-    // Mock submission — log to console
+    // Log submission details
     console.log('Submitting quote request:', data)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
 
     const url = whatsAppHref(getWhatsAppMessage(data))
-    window.open(url, '_blank')
+    window.location.href = url
 
     setIsSubmitting(false)
     setStep(2)
