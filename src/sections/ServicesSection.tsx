@@ -1,4 +1,4 @@
-import { services } from '../constants/content'
+import { serviceCategories } from '../constants/content'
 import { Button } from '../components/Button'
 
 export function ServicesSection() {
@@ -11,17 +11,19 @@ export function ServicesSection() {
           restoration—we focus on battered walls, crisp lines, and respectful site habits.
         </p>
         <div className="services__grid">
-          {services.map((s) => (
+          {serviceCategories.map((cat) => (
             <article
-              key={s.id}
-              className={`service-card service-card--${s.id} surface-card${s.id === 'skimming' ? ' service-card--featured' : ''}`}
+              key={cat.id}
+              className={`service-card service-card--${cat.id} surface-card`}
             >
-              <div className={`service-card__accent service-card__accent--${s.id}`} aria-hidden />
-              <h3 className="service-card__title">{s.title}</h3>
-              <p className="service-card__tagline">{s.tagline}</p>
+              <div className={`service-card__accent service-card__accent--${cat.id}`} aria-hidden />
+              <h3 className="service-card__title">{cat.title}</h3>
+              <p className="service-card__tagline">{cat.tagline}</p>
               <ul className="service-card__bullets">
-                {s.bullets.map((b) => (
-                  <li key={b}>{b}</li>
+                {cat.items.map((item) => (
+                  <li key={item.id} title={item.description}>
+                    {item.title}
+                  </li>
                 ))}
               </ul>
               <div className="service-card__actions">

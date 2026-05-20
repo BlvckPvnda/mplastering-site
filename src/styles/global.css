@@ -869,37 +869,9 @@ a:hover {
 
 @media (min-width: 900px) {
   .services__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-  }
-
-  /* Featured card: full-width at the bottom, shallower depth */
-  .service-card--featured {
-    grid-column: 1 / -1;
-    order: 99;
-    padding-block: 0.875rem;
-  }
-
-  .service-card--featured .service-card__title {
-    font-size: 1.4rem;
-  }
-
-  .service-card--featured .service-card__bullets {
-    display: flex;
-    justify-content: center;
-    gap: 0.35rem 1.5rem;
-    list-style: none;
-    padding: 0;
-    text-align: center;
-    margin-inline: auto;
-  }
-
-  /* Restore bullet markers without disrupting layout */
-  .service-card--featured .service-card__bullets li::before {
-    content: '•';
-    margin-right: 0.4rem;
-    color: var(--accent);
-    font-size: 1em;
+    align-items: stretch;
   }
 }
 
@@ -1477,11 +1449,12 @@ a:hover {
   padding: var(--s-8) !important;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .quote__price-guide-label {
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--s-2);
   font-size: var(--text-sm);
   font-weight: 700;
   text-transform: uppercase;
@@ -1489,12 +1462,45 @@ a:hover {
   color: var(--text-muted);
 }
 
-.quote__price-guide-list {
-  margin: 0 0 0.5rem;
-  padding-left: 1.1rem;
+.quote__price-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  margin-block: var(--s-6);
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.quote__price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--s-3);
+  border-bottom: 1px dashed var(--border);
+  gap: var(--s-4);
+}
+
+.quote__price-row:last-child {
+  border-bottom: none;
+}
+
+.quote__price-service {
+  font-weight: 600;
   color: var(--text);
+  font-size: 1.05rem;
+}
+
+.quote__price-amount {
+  color: var(--text-muted);
   font-size: 0.95rem;
-  line-height: 1.7;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.quote__price-amount strong {
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-left: 0.25rem;
 }
 
 .quote__price-guide-note {

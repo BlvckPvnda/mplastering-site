@@ -12,12 +12,35 @@ export function QuoteSection() {
 
         <div className="quote__grid">
           <div className="quote__price-guide surface-card">
-            <p className="quote__price-guide-label">Typical job guide prices</p>
-            <ul className="quote__price-guide-list">
-              <li>Single room re-skim — <strong>from £180</strong></li>
-              <li>Artex removal &amp; smooth — <strong>from £250</strong></li>
-              <li>Exterior render (per m²) — <strong>from £35</strong></li>
-            </ul>
+            <h3 className="quote__price-guide-label">Typical job guide prices</h3>
+            
+            <div className="quote__price-rows">
+              <div className="quote__price-row">
+                <span className="quote__price-service">Single room re-skim</span>
+                <span className="quote__price-amount">from <strong>£180</strong></span>
+              </div>
+              <div className="quote__price-row">
+                <span className="quote__price-service">Two-coat plastering (Float &amp; Set)</span>
+                <span className="quote__price-amount">from <strong>£220</strong></span>
+              </div>
+              <div className="quote__price-row">
+                <span className="quote__price-service">Artex removal &amp; smooth</span>
+                <span className="quote__price-amount">from <strong>£250</strong></span>
+              </div>
+              <div className="quote__price-row">
+                <span className="quote__price-service">Plasterboard wall installation</span>
+                <span className="quote__price-amount">from <strong>£150</strong></span>
+              </div>
+              <div className="quote__price-row">
+                <span className="quote__price-service">Plaster patching &amp; repairs</span>
+                <span className="quote__price-amount">from <strong>£80</strong></span>
+              </div>
+              <div className="quote__price-row">
+                <span className="quote__price-service">Exterior render (per m²)</span>
+                <span className="quote__price-amount">from <strong>£35</strong></span>
+              </div>
+            </div>
+
             <p className="quote__price-guide-note">No obligation to proceed. Free on-site quote available.</p>
           </div>
           <MultiStepQuoteForm />

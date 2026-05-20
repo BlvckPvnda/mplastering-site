@@ -24,42 +24,161 @@ export const navItems = [
 export type Service = {
   id: string
   title: string
-  tagline: string
-  bullets: string[]
+  description: string
 }
 
-export const services: Service[] = [
+export type ServiceCategory = {
+  id: string
+  title: string
+  tagline: string
+  items: Service[]
+}
+
+export const serviceCategories: ServiceCategory[] = [
   {
     id: 'skimming',
-    title: 'Internal skimming',
-    tagline: 'Glass-smooth finishes for every room.',
-    bullets: [
-      'New builds and re-skims',
-      'Wall repairs and making good',
-      'Artex removal and ceiling smoothing',
+    title: 'Plastering & Skimming',
+    tagline: 'Glass-smooth finishes for internal walls and ceilings.',
+    items: [
+      {
+        id: 'reskims',
+        title: 'Wall and Ceiling Re-skims',
+        description:
+          'A fresh layer of finishing plaster applied over existing walls and ceilings to restore a smooth, flat surface ready for decorating.',
+      },
+      {
+        id: 'skimming',
+        title: 'Plaster Skimming',
+        description:
+          'A thin coat of finishing plaster applied over plasterboard or existing surfaces to create a smooth, paint-ready finish.',
+      },
+      {
+        id: 'float-set',
+        title: 'Two-Coat Plastering (Float and Set)',
+        description:
+          'A two-stage plastering process where a sand and cement or bonding coat is applied first (float), followed by a finishing plaster coat (set) for a durable, smooth result.',
+      },
+      {
+        id: 'ceilings',
+        title: 'Ceiling Plastering',
+        description:
+          'Full plastering of ceilings using the appropriate base and finish coats to achieve a flat, smooth surface free from cracks or imperfections.',
+      },
+      {
+        id: 'drylining',
+        title: 'Drylining',
+        description:
+          'Installation of plasterboard to internal walls using a metal or timber frame system, improving insulation and creating a smooth surface without wet plaster.',
+      },
+      {
+        id: 'tacking',
+        title: 'Plasterboarding / Tacking',
+        description:
+          'Fixing plasterboard sheets to ceilings and walls as a base layer before plastering, providing a stable and even surface for finishing.',
+      },
+      {
+        id: 'bonding',
+        title: 'Dot and Dab Bonding',
+        description:
+          'A method of fixing plasterboard directly to masonry walls using dabs of bonding adhesive, ideal for insulating and lining internal walls quickly and efficiently.',
+      },
+      {
+        id: 'wall-install',
+        title: 'Plasterboard Wall Installation',
+        description:
+          'Full supply and installation of plasterboard walls, creating new partitions or lining existing walls ready for skimming or dry finishing.',
+      },
     ],
   },
   {
     id: 'rendering',
-    title: 'Exterior rendering',
-    tagline: 'Modernise your home\'s kerb appeal.',
-    bullets: [
-      'Monocouche and through-colour systems',
-      'K Rend and similar modern renders',
-      'Traditional sand and cement finishes',
+    title: 'Exterior Rendering',
+    tagline: 'Modernise and protect your home\'s external walls.',
+    items: [
+      {
+        id: 'house-render',
+        title: 'House Rendering',
+        description:
+          'Application of a render coat to the external walls of a property to protect against the elements and provide a clean, attractive finish.',
+      },
+      {
+        id: 'monocouche',
+        title: 'Monocouche Rendering',
+        description:
+          'A single-coat through-coloured render system applied to external walls, offering a durable, low-maintenance finish that doesn\'t require painting.',
+      },
+      {
+        id: 'k-rend',
+        title: 'K-Rend & Silicone Renders',
+        description:
+          'Application of premium silicone-based render systems such as K-Rend, offering excellent weather resistance, flexibility, and a long-lasting decorative finish.',
+      },
+      {
+        id: 'sand-cement',
+        title: 'Traditional Sand and Cement Render',
+        description:
+          'A tried and tested external render mix applied to walls for a hard-wearing, weatherproof finish, suitable for a wide range of properties.',
+      },
+      {
+        id: 'ewi',
+        title: 'External Wall Insulation (EWI)',
+        description:
+          'Installation of an insulation board system to the outside of a property, improving thermal performance and finished with a decorative render coat.',
+      },
     ],
   },
   {
     id: 'restoration',
-    title: 'Artex removal & wall revival',
-    tagline: 'Giving tired walls a brand new life.',
-    bullets: [
-      'Repairing "battered" and damaged walls',
-      'Crack repairs and surface preparation',
-      'Damp-proofing preparation',
+    title: 'Restoration & Repairs',
+    tagline: 'Specialist repairs, artex removal, and decorative finishings.',
+    items: [
+      {
+        id: 'artex',
+        title: 'Artex Removal & Flattening',
+        description:
+          'Removal or flattening of textured Artex coatings on ceilings and walls, leaving a clean, smooth surface suitable for modern décor.',
+      },
+      {
+        id: 'patching',
+        title: 'Plaster Patching & Repairs',
+        description:
+          'Localised repair of damaged, cracked, or blown plaster areas, blended seamlessly with the surrounding surface for a uniform finish.',
+      },
+      {
+        id: 'water-damage',
+        title: 'Water Damage Plaster Repair',
+        description:
+          'Removal and replacement of plaster affected by water ingress or leaks, ensuring the substrate is sound and dry before replastering.',
+      },
+      {
+        id: 'damp-damage',
+        title: 'Damp Damage Plastering',
+        description:
+          'Specialist replastering of walls affected by damp, using appropriate backing coats and materials to prevent recurrence and restore a solid finish.',
+      },
+      {
+        id: 'coving',
+        title: 'Coving and Cornice Installation',
+        description:
+          'Supply and fitting of decorative coving or cornice along the junction of walls and ceilings to add a traditional or period finish to a room.',
+      },
+      {
+        id: 'mouldings',
+        title: 'Plaster Moulding Repairs',
+        description:
+          'Restoration and repair of existing decorative plaster mouldings, cornices, and ceiling roses, matching the original profile and finish.',
+      },
+      {
+        id: 'screeding',
+        title: 'Floor Screeding',
+        description:
+          'Application of a sand and cement or liquid screed mix over a floor base to create a smooth, level surface ready for tiling, wood flooring, or other floor coverings.',
+      },
     ],
   },
 ]
+
+export const services: Service[] = serviceCategories.flatMap((cat) => cat.items)
 
 // ─── Trust bar ─────────────────────────────────────────────────────────────
 export const trustItems = [
