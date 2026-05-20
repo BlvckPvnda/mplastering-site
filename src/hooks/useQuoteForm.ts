@@ -26,6 +26,7 @@ export function useQuoteForm() {
   const [data, setData] = useState<FormState>(initial)
   const [errors, setErrors] = useState<QuoteFormErrors>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorFocusTrigger, setErrorFocusTrigger] = useState(0)
 
   const updateField = useCallback((field: keyof FormState, value: string) => {
     setData((prev) => ({ ...prev, [field]: value }))
@@ -37,6 +38,7 @@ export function useQuoteForm() {
     const stepErrors = validateStep0(data)
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors)
+      setErrorFocusTrigger((prev) => prev + 1)
       return false
     }
     setStep(1)
@@ -47,6 +49,7 @@ export function useQuoteForm() {
     const stepErrors = validateStep1(data)
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors)
+      setErrorFocusTrigger((prev) => prev + 1)
       return false
     }
 
@@ -83,5 +86,6 @@ export function useQuoteForm() {
     nextFrom1,
     goBack,
     whatsAppUrl: whatsAppHref(waMessage),
+    errorFocusTrigger,
   }
 }

@@ -14,21 +14,22 @@ export function MultiStepQuoteForm() {
     nextFrom1,
     goBack,
     whatsAppUrl,
+    errorFocusTrigger,
   } = useQuoteForm()
 
   const firstErrorRef = useRef<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(null)
   const errorSummaryRef = useRef<HTMLParagraphElement>(null)
 
-  // Focus management for errors
+  // Focus management for errors — only run when validation is explicitly triggered
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
+    if (errorFocusTrigger > 0 && Object.keys(errors).length > 0) {
       if (errorSummaryRef.current) {
         errorSummaryRef.current.focus()
       } else if (firstErrorRef.current) {
         firstErrorRef.current.focus()
       }
     }
-  }, [errors])
+  }, [errorFocusTrigger])
 
   if (step === 2) {
     return (
