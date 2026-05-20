@@ -1240,15 +1240,16 @@ a:hover {
   background: var(--accent);
 }
 
-.quote__layout {
+.quote__grid {
   display: grid;
   gap: var(--s-12);
+  text-align: left;
 }
 
 @media (min-width: 900px) {
-  .quote__layout {
-    grid-template-columns: 0.85fr 1.15fr;
-    align-items: start;
+  .quote__grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
     gap: var(--s-16);
   }
 }
@@ -1472,8 +1473,11 @@ a:hover {
 
 /* Quote section price guide */
 .quote__price-guide {
-  margin-top: var(--s-6);
-  padding: var(--s-5) var(--s-6) !important;
+  margin-top: 0;
+  padding: var(--s-8) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .quote__price-guide-label {
