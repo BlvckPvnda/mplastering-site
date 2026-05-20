@@ -31,7 +31,7 @@ export function ReviewsSection() {
 
         <div className="reviews__cta-wrapper">
           <Button
-            href="https://www.facebook.com/Mplastering/reviews"
+            href="https://www.facebook.com/mplastering1/reviews"
             variant="secondary"
             target="_blank"
             rel="noreferrer"
