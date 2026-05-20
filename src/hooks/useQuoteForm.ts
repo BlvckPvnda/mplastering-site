@@ -45,6 +45,17 @@ export function useQuoteForm() {
     return true
   }, [data])
 
+  const getWhatsAppMessage = useCallback((formData: FormState) => {
+    const selectedService = services.find((s) => s.id === formData.serviceId)?.title ?? formData.serviceId
+    return (
+      `Estimate request — ${formData.name}\n` +
+      `Postcode: ${formData.postcode}\n` +
+      `Phone: ${formData.phone}\n` +
+      `Service: ${selectedService}\n\n` +
+      `Details: ${formData.message}`
+    )
+  }, [])
+
   const nextFrom1 = useCallback(async () => {
     const stepErrors = validateStep1(data)
     if (Object.keys(stepErrors).length > 0) {
@@ -55,26 +66,22 @@ export function useQuoteForm() {
 
     setIsSubmitting(true)
 
-    // Mock submission — replace with actual API call before launch
+    // Mock submission — log to console
     console.log('Submitting quote request:', data)
     await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    const url = whatsAppHref(getWhatsAppMessage(data))
+    window.open(url, '_blank')
 
     setIsSubmitting(false)
     setStep(2)
     return true
-  }, [data])
+  }, [data, getWhatsAppMessage])
 
   const goBack = useCallback(() => {
     setStep(0)
     setErrors({})
   }, [])
-
-  const waMessage =
-    `Estimate request — ${data.name}\n` +
-    `Postcode: ${data.postcode}\n` +
-    `Phone: ${data.phone}\n` +
-    `Service: ${data.serviceId}\n` +
-    `${data.message}`
 
   return {
     step,
@@ -85,7 +92,7 @@ export function useQuoteForm() {
     nextFrom0,
     nextFrom1,
     goBack,
-    whatsAppUrl: whatsAppHref(waMessage),
+    whatsAppUrl: whatsAppHref(getWhatsAppMessage(data)),
     errorFocusTrigger,
   }
 }
